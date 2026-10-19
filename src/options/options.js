@@ -13,6 +13,8 @@
 
   function $(id) { return document.getElementById(id); }
 
+  var savedTarget = "";
+
   function storeGet() {
     var maybe = api.storage.local.get([C.STORE_KEY]);
     if (maybe && typeof maybe.then === "function") return Promise.resolve(maybe);
@@ -37,11 +39,18 @@
     $("target").value = config.target || "";
     $("label").value = config.label || "";
     $("notify").checked = config.notify !== false;
+    savedTarget = config.target || "";
     paintPreview();
   }
 
   function save() {
-    config.target = $("target").value;
+    var newTarget = $("target").value;
+    // A fresh target restarts the "how far along are we" progress.
+    if (newTarget !== savedTarget || !C.isValidDay(config.startedAt)) {
+      config.startedAt = C.dayKey(new Date());
+    }
+    savedTarget = newTarget;
+    config.target = newTarget;
     config.label = $("label").value.trim().slice(0, 60);
     config.notify = $("notify").checked;
     if (!C.isValidDay(config.target)) {
