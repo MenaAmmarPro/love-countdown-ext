@@ -70,7 +70,10 @@
     $("s").textContent = parts.s;
 
     var fill = $("progress-fill");
-    if (fill) fill.style.width = Math.round(C.progress(C.dayKey(start), config.target) * 100) + "%";
+    if (fill) {
+      var from = C.isValidDay(config.startedAt) ? config.startedAt : C.dayKey(start);
+      fill.style.width = Math.round(C.progress(from, config.target) * 100) + "%";
+    }
 
     if (targetMs() - Date.now() <= 0) {
       $("days-big").textContent = "♥";
