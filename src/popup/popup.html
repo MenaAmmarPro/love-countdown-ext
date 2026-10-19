@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Our countdown</title>
+  <link rel="stylesheet" href="../common/theme.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="popup">
+    <header class="popup-head">
+      <span class="popup-heart" aria-hidden="true">♥</span>
+      <div>
+        <h1 class="popup-title">Our countdown</h1>
+        <p class="popup-label" id="label">our day</p>
+      </div>
+    </header>
+
+    <section class="countdown" id="countdown">
+      <p class="days-big" id="days-big">—</p>
+      <p class="days-cap">days to go</p>
+      <div class="clock" aria-label="Time remaining">
+        <span class="clock-cell"><strong id="d">0</strong><em>days</em></span>
+        <span class="clock-cell"><strong id="h">00</strong><em>hrs</em></span>
+        <span class="clock-cell"><strong id="m">00</strong><em>min</em></span>
+        <span class="clock-cell"><strong id="s">00</strong><em>sec</em></span>
+      </div>
+      <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progress-fill"></div></div>
+      <p class="milestone" id="milestone">&nbsp;</p>
+    </section>
+
+    <section class="setup" id="setup" hidden>
+      <p class="muted">Pick the day we're counting to, and a little name for it.</p>
+      <button class="btn btn-primary" id="open-options" type="button">Choose a date</button>
+    </section>
+
+    <section class="upcoming" id="upcoming" hidden>
+      <h2 class="upcoming-title">Milestones ahead</h2>
+      <ul class="milestone-list" id="milestone-list"></ul>
+    </section>
+
+    <footer class="popup-foot">
+      <span class="muted" id="status" aria-live="polite"></span>
+      <button class="btn btn-ghost" id="edit" type="button">Edit</button>
+    </footer>
+  </main>
+  <script src="../common/api.js"></script>
+  <script src="../common/data.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
