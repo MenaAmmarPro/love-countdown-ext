@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Our countdown — settings</title>
+  <link rel="stylesheet" href="../common/theme.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main class="options">
+    <header class="options-head">
+      <h1>Our countdown <span aria-hidden="true">♥</span></h1>
+      <p class="muted">Pick the day we're counting to. The toolbar badge shows the days left.</p>
+    </header>
+
+    <form id="settings">
+      <label class="field">
+        <span>Target date</span>
+        <input type="date" id="target" required>
+      </label>
+
+      <label class="field">
+        <span>What we call it</span>
+        <input type="text" id="label" maxlength="60" placeholder="our day">
+      </label>
+
+      <label class="field check">
+        <input type="checkbox" id="notify">
+        <span>Show a notification on milestone days</span>
+      </label>
+
+      <div class="actions">
+        <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn btn-ghost" id="test" type="button">Send a test notification</button>
+      </div>
+      <p class="status" id="status" aria-live="polite"></p>
+    </form>
+
+    <section class="preview">
+      <h2 class="preview-title">Preview</h2>
+      <p class="preview-line"><span class="preview-badge" id="badge">—</span> on the toolbar</p>
+      <p class="preview-line" id="preview-text">Pick a date to begin.</p>
+      <p class="muted">Milestones: 365 · 200 · 100 · 50 · 30 · 14 · 7 · 3 · 2 · 1 · 0 days.</p>
+    </section>
+  </main>
+  <script src="../common/api.js"></script>
+  <script src="../common/data.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>
