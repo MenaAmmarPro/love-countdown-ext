@@ -21,7 +21,8 @@
     target: "",
     label: "our day",
     notify: true,
-    fired: {}
+    fired: {},
+    startedAt: ""
   };
 
   var STORE_KEY = "mena-countdown";
@@ -144,12 +145,14 @@
       target: "",
       label: DEFAULT_CONFIG.label,
       notify: true,
-      fired: {}
+      fired: {},
+      startedAt: ""
     };
     if (raw && typeof raw === "object") {
       if (isValidDay(raw.target)) out.target = raw.target;
       if (typeof raw.label === "string") out.label = raw.label.slice(0, 60);
       if (typeof raw.notify === "boolean") out.notify = raw.notify;
+      if (isValidDay(raw.startedAt)) out.startedAt = raw.startedAt;
       if (raw.fired && typeof raw.fired === "object") {
         Object.keys(raw.fired).forEach(function (k) {
           if (raw.fired[k]) out.fired[k] = true;
