@@ -133,6 +133,10 @@ function eq(a, b, msg) {
   eq(C.splitRemaining(-50).done, true, "splitRemaining flags a finished countdown");
   eq(C.padRemaining(C.splitRemaining(ms)), { d: "2", h: "03", m: "04", s: "05", done: false }, "padRemaining zero-pads");
   eq(C.progress("2026-01-01", "2026-01-11", new Date(2026, 0, 6)), 0.5, "progress is a clamped fraction");
+  eq(C.progress("2026-01-01", "2026-01-11", new Date(2026, 0, 1)), 0, "progress at the very start");
+  eq(C.progress("2026-01-01", "2026-01-11", new Date(2026, 0, 11)), 1, "progress at the end");
+  eq(C.progress("2026-01-01", "2026-01-11", new Date(2025, 11, 28)), 0, "progress clamped below zero");
+  eq(C.progress("2026-01-01", "2026-01-11", new Date(2026, 0, 20)), 1, "progress clamped above one");
 
   /* ---- config + notifications ---- */
   eq(C.normalizeConfig(null).target, "", "normalizeConfig tolerates null");
@@ -141,6 +145,8 @@ function eq(a, b, msg) {
   eq(cfg.label, "Valentine's", "normalizeConfig keeps the label");
   assert(cfg.fired["x:7"], "normalizeConfig keeps fired flags");
   eq(C.normalizeConfig({ target: "junk" }).target, "", "normalizeConfig drops a bad target");
+  eq(C.normalizeConfig({ target: "2026-02-14", startedAt: "2026-01-01" }).startedAt, "2026-01-01", "normalizeConfig keeps the start day");
+  eq(C.normalizeConfig({ target: "2026-02-14", startedAt: "junk" }).startedAt, "", "normalizeConfig drops a bad start day");
 
   assert(C.shouldNotify({ notify: true, target: "2026-01-15", fired: {} }, new Date(2026, 0, 5)) === false,
     "shouldNotify is false on a non-milestone day");
